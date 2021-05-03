@@ -1,0 +1,86 @@
+1. Lakukan import database :
+
+//login ke mysql
+mysql -u root
+
+//buat db baru
+CREATE DATABASE trisna_nugraha;
+
+//import file sql ke db yang telah dibuat
+mysql -u root trisna_nugraha < indonesia.sql
+
+------------------------------------------------------------
+
+2. Tampilkan data dari setiap table :
+
+//use db
+USE trisna_nugraha;
+
+//menampilkan data dari table districts
+SELECT * FROM districts;
+
+//menampilkan data dari table provinces
+SELECT * FROM districts;
+
+//menampilkan data dari table regencies
+SELECT * FROM regencies;
+
+//menampilkan data dari table villages
+SELECT * FROM villages;
+
+------------------------------------------------------------
+
+3. Silahkan ganti nama tabel “provinces” menjadi “provinsi”
+
+RENAME TABLE provinces TO provinsi;
+
+------------------------------------------------------------
+
+4. Silahkan ganti nama tabel “regencies” menjadi “kabupaten_kota”
+
+RENAME TABLE regencies TO kabupaten_kota;
+
+------------------------------------------------------------
+
+5. Silahkan ganti nama table “districts” menjadi “kecamatan”
+
+RENAME TABLE districts TO kecamatan;
+
+------------------------------------------------------------
+
+6. silahkan ganti nama table “villages” menjadi “desa”
+
+RENAME TABLE villages TO desa;
+
+------------------------------------------------------------
+
+7. Seleksi data sehingga akan menampilkan hasil format tabel seperti berikut :
+
+SELECT k.id AS id_desa, d.name AS desa, prov.name AS provinsi 
+FROM desa d 
+JOIN kecamatan k ON d.district_id = k.id 
+JOIN kabupaten_kota kt ON k.regency_id = kt.id 
+JOIN provinsi prov ON kt.province_id = prov.id
+ORDER BY id_desa ASC;
+
+------------------------------------------------------------
+
+8. Seleksi data sehingga akan menampilkan hasil format tabel seperti berikut :
+
+SELECT kt.id AS id_kecamatan, k.name AS kecamatan, prov.name AS provinsi 
+FROM kecamatan k 
+JOIN kabupaten_kota kt ON k.regency_id = kt.id 
+JOIN provinsi prov ON kt.province_id = prov.id 
+ORDER BY id_kecamatan ASC;
+
+
+------------------------------------------------------------
+
+9. Seleksi data sehingga akan menampilkan hasil format tabel seperti berikut :
+
+------------------------------------------------------------
+
+SELECT kt.id AS id_kabupaten_kota, kt.name AS kabupaten_kota, prov.name AS provinsi 
+FROM kabupaten_kota kt 
+JOIN provinsi prov ON kt.province_id = prov.id 
+ORDER BY id_kabupaten_kota ASC;
